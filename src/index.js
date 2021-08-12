@@ -8,6 +8,9 @@ const app = express();
 
 connectDB();
 
+// init middleware
+app.use(express.json({ extended: false }))
+
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/profile', profileRouter);
