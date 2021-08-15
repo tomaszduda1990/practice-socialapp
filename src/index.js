@@ -1,4 +1,4 @@
-const express =  require('express');
+const express = require('express');
 const connectDB = require('../config/db');
 const usersRouter = require('./routes/api/users');
 const authRouter = require('./routes/api/auth');
@@ -9,7 +9,7 @@ const app = express();
 connectDB();
 
 // init middleware
-app.use(express.json({ extended: false }))
+app.use(express.json({ extended: false }));
 
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
