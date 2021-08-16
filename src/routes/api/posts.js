@@ -152,4 +152,79 @@ router.put('/unlike/:post_id', auth, async (req, res, next) => {
 	}
 });
 
+// @route  POST api/post/comment/:id
+// @desc   commnet on the post
+// @access private
+router.post(
+	'/comment/:id',
+	[
+		auth,
+		[
+			check('text', 'Invalid text input (1-200) characters')
+				.notEmpty()
+				.isLength({ max: 200 }),
+		],
+	],
+	async (req, res, next) => {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			return res.status(400).json({ errors: errors.array() });
+		}
+		try {
+			const user = await User.findById(req.user.id).select('-password');
+			const post = await Post.findById(req.params.id);
+
+			const newComment = {
+				text: req.body.text,
+				name: user.name,
+				avatar: user.avatar,
+				user: req.user.id,
+			};
+
+			post.comments.unshift(newComment);
+			await post.save();
+			res.json(post.comments);
+		} catch (err) {
+			console.error(err);
+			res.status(500).send('Server error');
+		}
+	}
+);
+
+// @route  delete api/post/comment/:id
+// @desc   remove comment from the post
+// @access private
+
+router.delete('/comment/:id/:comment_id', auth, async (req, res, next) => {
+	try {
+		const post = await Post.findById(req.params.id);
+		if (post.user.toString() !== req.user.id) {
+			return res.status(401).json({ msg: 'Not authorized' });
+		}
+
+		if (!post) {
+			return res.status(404).json({ msg: 'Cannot find post' });
+		}
+
+		const commentExist = post.comments.find(
+			(comment) => comment.id === req.params.comment_id
+		);
+		if (!commentExist) {
+			return res.status(404).json({ msg: 'Cannot find comment' });
+		}
+
+		const updatedComments = post.comments.filter(
+			(comment) => comment._id.toString() !== req.params.comment_id
+		);
+		post.comments = updatedComments;
+		await post.save();
+		res.json(post.comments);
+	} catch (err) {
+		console.error(err);
+		if (err.kind === 'ObjectId') {
+			return res.status(404).json({ msg: 'User not authorized' });
+		}
+		res.status(500).send('internal server error');
+	}
+});
 module.exports = router;
