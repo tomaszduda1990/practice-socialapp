@@ -99,4 +99,57 @@ router.delete('/:post_id', auth, async (req, res, next) => {
 	}
 });
 
+// @route  PUT api/posts/like/:post_id
+// @desc   add post like by id
+// @access private
+
+router.put('/like/:post_id', auth, async (req, res, next) => {
+	try {
+		const post = await Post.findById(req.params.post_id);
+		if (!post) {
+			return res.status(400).json({ msg: 'Post not found' });
+		}
+		const hasLike =
+			post.likes.findIndex((like) => like.user.toString() === req.user.id) > -1;
+		if (!hasLike) {
+			post.likes.unshift({ user: req.user.id });
+			await post.save();
+			return res.status(200).json(post.likes);
+		} else {
+			return res.status(400).json({ msg: 'Post already liked' });
+		}
+	} catch (err) {
+		console.error(err);
+		res.status(500).send('Internal server error');
+	}
+});
+
+// @route  PUT api/posts/unlike/:post_id
+// @desc   add post like by id
+// @access private
+
+router.put('/unlike/:post_id', auth, async (req, res, next) => {
+	try {
+		const post = await Post.findById(req.params.post_id);
+		if (!post) {
+			return res.status(400).json({ msg: 'Post not found' });
+		}
+		const hasLike =
+			post.likes.findIndex((like) => like.user.toString() === req.user.id) > -1;
+		if (hasLike) {
+			const updatedLikesPost = post.likes.filter(
+				(like) => like.user.toString() !== req.user.id
+			);
+			post.likes = updatedLikesPost;
+			await post.save();
+			return res.status(200).json(post.likes);
+		} else {
+			return res.status(400).json({ msg: 'Post already unliked' });
+		}
+	} catch (err) {
+		console.error(err);
+		res.status(500).send('Internal server error');
+	}
+});
+
 module.exports = router;
