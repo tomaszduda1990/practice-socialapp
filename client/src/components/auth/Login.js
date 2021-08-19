@@ -13,8 +13,6 @@ export const Login = () => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	const onSubmit = async (e) => {
 		e.preventDefault();
-		console.log(formData);
-		console.log('Should send a request');
 	};
 	return (
 		<section className='container'>
