@@ -1,4 +1,9 @@
-import { REGISTER_SUCCESS, REGISTER_FAIL } from '../actions/Types';
+import {
+	REGISTER_SUCCESS,
+	REGISTER_FAIL,
+	USER_LOADED,
+	AUTH_ERROR,
+} from '../actions/Types';
 const initialState = {
 	token: localStorage.getItem('socialAppToken'),
 	isAuthenticated: null,
@@ -17,12 +22,20 @@ const authReducer = (state = initialState, action) => {
 				loading: false,
 			};
 		case REGISTER_FAIL:
+		case AUTH_ERROR:
 			localStorage.removeItem('socialAppToken');
 			return {
 				...state,
 				token: null,
 				loading: false,
 				isAuthenticated: false,
+			};
+		case USER_LOADED:
+			return {
+				...state,
+				isAuthenticated: true,
+				loading: false,
+				user: payload,
 			};
 		default:
 			return state;
