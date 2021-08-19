@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { setAlert } from '../../actions/alert';
-const Register = ({ setAlert }) => {
+import { register } from '../../actions/auth';
+const Register = ({ setAlert, register }) => {
 	const [formData, setFormData] = useState({
 		name: '',
 		email: '',
@@ -21,8 +22,8 @@ const Register = ({ setAlert }) => {
 		if (password !== password2) {
 			setAlert('Passwords do not match!', 'danger');
 		} else {
-			//const newUser = { name, email, password };
-			console.log('success');
+			const newUser = { name, email, password };
+			register(newUser);
 		}
 	};
 	return (
@@ -89,9 +90,10 @@ const Register = ({ setAlert }) => {
 
 Register.propTypes = {
 	setAlert: PropTypes.func.isRequired,
+	register: PropTypes.func.isRequired,
 };
 
-export default connect(null, { setAlert })(Register);
+export default connect(null, { setAlert, register })(Register);
 // older approach ?
 
 // const mapDispatchToProps = (dispatch) => ({
