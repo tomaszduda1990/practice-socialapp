@@ -19,12 +19,20 @@ const Navbar = ({ loading, isAuthenticated, logout }) => {
 		</>
 	);
 	const loggedIndNavLinks = (
-		<li>
-			<Link onClick={logout} to='/login'>
-				<i className='fas fa-sign-out-alt'></i>{' '}
-				<span className='hide-sm'>Logout</span>
-			</Link>
-		</li>
+		<>
+			<li>
+				<Link to='/dashboard'>
+					<i className='fas fa-user-alt'></i>{' '}
+					<span className='hide-sm'>Dashboard</span>
+				</Link>
+			</li>
+			<li>
+				<Link onClick={logout} to='/login'>
+					<i className='fas fa-sign-out-alt'></i>{' '}
+					<span className='hide-sm'>Logout</span>
+				</Link>
+			</li>
+		</>
 	);
 	return (
 		<nav className='navbar bg-dark'>

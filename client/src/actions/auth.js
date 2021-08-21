@@ -8,6 +8,7 @@ import {
 	LOGIN_USER,
 	LOGIN_FAIL,
 	LOGOUT,
+	CLEAR_PROFILE,
 } from './Types';
 import setAuthToken from '../utils/setAuthToken';
 // load user
@@ -81,5 +82,6 @@ export const login =
 		}
 	};
 export const logout = () => async (dispatch) => {
+	dispatch({ type: CLEAR_PROFILE });
 	dispatch({ type: LOGOUT });
 };
