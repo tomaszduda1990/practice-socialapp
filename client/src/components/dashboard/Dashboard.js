@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getCurrentUserProfile } from '../../actions/profile';
+import DashboardActions from './DashboardActions';
 import Spinner from '../layout/Spinner';
 
 const Dashboard = ({
@@ -13,7 +14,7 @@ const Dashboard = ({
 	useEffect(() => {
 		getCurrentUserProfile();
 	}, []);
-	return loading && profile === null ? (
+	return loading && !profile ? (
 		<>
 			<Spinner size={'medium'} />
 		</>
@@ -24,7 +25,9 @@ const Dashboard = ({
 				<i className='fas fa-user'></i>Welcome {user && user.name}
 			</p>
 			{profile !== null ? (
-				<>has profile</>
+				<>
+					<DashboardActions />
+				</>
 			) : (
 				<>
 					<p>You don't have a profile, please add some info</p>
