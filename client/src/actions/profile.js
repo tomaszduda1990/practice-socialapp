@@ -9,7 +9,10 @@ export const getCurrentUserProfile = () => async (dispatch) => {
 	} catch (err) {
 		dispatch({
 			type: PROFILE_ERROR,
-			payload: { msg: err.response.statusText, status: err.response.status },
+			payload: {
+				msg: err.response.statusText,
+				status: err.response.status,
+			},
 		});
 		dispatch(setAlert());
 	}
@@ -42,7 +45,10 @@ export const createProfile =
 			}
 			dispatch({
 				type: PROFILE_ERROR,
-				payload: { msg: err.response.statusText, status: err.response.status },
+				payload: {
+					msg: err.response.data.statusText,
+					status: err.response.data.status,
+				},
 			});
 		}
 	};
@@ -69,7 +75,10 @@ export const addExperience = (formData, history) => async (dispatch) => {
 		}
 		dispatch({
 			type: PROFILE_ERROR,
-			payload: { msg: err.response.statusText, status: err.response.status },
+			payload: {
+				msg: err.response.data.statusText,
+				status: err.response.data.status,
+			},
 		});
 	}
 };

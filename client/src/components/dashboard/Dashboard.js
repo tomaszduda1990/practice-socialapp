@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getCurrentUserProfile } from '../../actions/profile';
 import DashboardActions from './DashboardActions';
+import Experience from './Experience';
 import Spinner from '../layout/Spinner';
+import Education from './Education';
 
 const Dashboard = ({
 	auth: { user },
@@ -14,7 +16,9 @@ const Dashboard = ({
 	useEffect(() => {
 		getCurrentUserProfile();
 	}, []);
-	return loading && !profile ? (
+
+	const profileLoaded = !!(profile && Object.keys(profile).length);
+	return loading && !profileLoaded ? (
 		<>
 			<Spinner size={'medium'} />
 		</>
@@ -24,9 +28,11 @@ const Dashboard = ({
 			<p className='lead'>
 				<i className='fas fa-user'></i>Welcome {user && user.name}
 			</p>
-			{profile !== null ? (
+			{profileLoaded ? (
 				<>
 					<DashboardActions />
+					<Experience experience={profile.experience} />
+					<Education education={profile.education} />
 				</>
 			) : (
 				<>

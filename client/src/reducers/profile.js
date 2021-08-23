@@ -16,7 +16,12 @@ const profile = (state = initialState, { type = '', payload = {} }) => {
 	switch (type) {
 		case UPDATE_USER:
 		case GET_PROFILE:
-			return { ...state, profile: payload.profile, loading: false, error: {} };
+			return {
+				...state,
+				profile: payload.profile,
+				loading: false,
+				error: {},
+			};
 		case PROFILE_ERROR:
 			return { ...state, error: payload, loading: false };
 
