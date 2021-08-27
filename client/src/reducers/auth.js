@@ -6,6 +6,7 @@ import {
 	LOGIN_USER,
 	LOGIN_FAIL,
 	LOGOUT,
+	DELETE_ACCOUNT,
 } from '../actions/Types';
 const initialState = {
 	token: localStorage.getItem('socialAppToken'),
@@ -29,6 +30,7 @@ const authReducer = (state = initialState, action) => {
 		case REGISTER_FAIL:
 		case AUTH_ERROR:
 		case LOGOUT:
+		case DELETE_ACCOUNT:
 			localStorage.removeItem('socialAppToken');
 			return {
 				...state,

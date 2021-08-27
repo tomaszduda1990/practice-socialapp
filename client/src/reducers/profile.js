@@ -18,7 +18,7 @@ const profile = (state = initialState, { type = '', payload = {} }) => {
 		case GET_PROFILE:
 			return {
 				...state,
-				profile: payload.profile,
+				profile: payload,
 				loading: false,
 				error: {},
 			};
