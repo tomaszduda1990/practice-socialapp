@@ -12,3 +12,5 @@ export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 export const PROFILE_ERROR = 'PROFILE_ERROR';
 export const UPDATE_USER = 'UPDATE_USER';
 export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
+export const GET_ALL_PROFILES = 'GET_ALL_PROFILES';
+export const GET_REPOS = 'GET_REPOS';
