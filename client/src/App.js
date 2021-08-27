@@ -17,6 +17,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
+import Profiles from './components/profiles/Profiles';
 const authToken = localStorage.getItem('socialAppToken');
 if (authToken) {
 	setAuthToken(authToken);
@@ -35,6 +36,7 @@ const App = () => {
 					<Switch>
 						<Route path='/login' component={Login} />
 						<Route path='/register' component={Register} />
+						<Route path='/profiles' component={Profiles} />
 						<PrivateRoute path='/dashboard' component={Dashboard} />
 						<PrivateRoute path='/create-profile' component={CreateProfile} />
 						<PrivateRoute path='/edit-profile' component={EditProfile} />
