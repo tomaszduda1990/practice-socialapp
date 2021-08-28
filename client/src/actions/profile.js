@@ -49,7 +49,8 @@ export const getProfileById = (id) => async (dispatch) => {
 	try {
 		const apiEndpoint = `/api/profile/user/${id}`;
 		const res = await axios.get(apiEndpoint);
-		dispatch({ type: GET_PROFILE, payload: res.data.profile });
+		console.log('from getRPofileID', res);
+		dispatch({ type: GET_PROFILE, payload: res.data });
 	} catch (err) {
 		dispatch({
 			type: PROFILE_ERROR,
