@@ -10,6 +10,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import PrivateRoute from './components/private/Private';
 import CreateProfile from './components/profile-form/CreateProfile';
 import EditProfile from './components/profile-form/EditProfile';
+import Profile from './components/profiles/Profile';
 import AddExperience from './components/profile-form/AddExperience';
 import AddEducation from './components/profile-form/AddEducation';
 // redux
@@ -37,6 +38,7 @@ const App = () => {
 						<Route path='/login' component={Login} />
 						<Route path='/register' component={Register} />
 						<Route path='/profiles' component={Profiles} />
+						<Route path='/profile/:id' component={Profile} />
 						<PrivateRoute path='/dashboard' component={Dashboard} />
 						<PrivateRoute path='/create-profile' component={CreateProfile} />
 						<PrivateRoute path='/edit-profile' component={EditProfile} />

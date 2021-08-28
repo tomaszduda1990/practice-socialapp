@@ -16,7 +16,7 @@ const Dashboard = ({
 }) => {
 	useEffect(() => {
 		getCurrentUserProfile();
-	}, []);
+	}, [getCurrentUserProfile]);
 
 	const profileLoaded = !!(profile && Object.keys(profile).length);
 	return loading && !profileLoaded ? (
