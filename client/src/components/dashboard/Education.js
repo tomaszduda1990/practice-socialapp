@@ -42,7 +42,7 @@ const Education = ({ education, deleteEducation: deleteEducationHandler }) => {
 };
 
 Education.propTypes = {
-  education: PropTypes.shape([]).isRequired,
+  education: PropTypes.array.isRequired,
   deleteEducation: PropTypes.func.isRequired,
 };
 

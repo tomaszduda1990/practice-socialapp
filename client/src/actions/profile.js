@@ -6,7 +6,7 @@ import {
   PROFILE_ERROR,
   UPDATE_USER,
   GET_ALL_PROFILES,
-  //   GET_REPOS,
+  GET_REPOS,
 } from "./Types";
 import setAlert from "./alert";
 
@@ -62,20 +62,20 @@ export const getProfileById = (id) => async (dispatch) => {
   }
 };
 
-// const getGithubProfiles = (username) => async (dispatch) => {
-//   try {
-//     const res = await axios.get(`/api/github/${username}`);
-//     dispatch({ type: GET_REPOS, payload: res.data.profile });
-//   } catch (err) {
-//     dispatch({
-//       type: PROFILE_ERROR,
-//       payload: {
-//         msg: err.response.statusText,
-//         status: err.response.status,
-//       },
-//     });
-//   }
-// };
+export const getGithubProfiles = (username) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/profile/github/${username}`);
+    dispatch({ type: GET_REPOS, payload: res.data });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: {
+        msg: err,
+        status: err.status,
+      },
+    });
+  }
+};
 
 export const createProfile =
   (formData, history, edit = false) =>
