@@ -25,7 +25,6 @@ module.exports = {
     ],
     "no-underscore-dangle": "off",
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
-    "react/prop-types": "off",
     "jsx-a11y/label-has-associated-control": [
       "error",
       {
@@ -44,5 +43,8 @@ module.exports = {
         },
       },
     ],
+    "react/prop-types": "off",
+    "import/no-named-as-default-member": 0,
+    "react/forbid-prop-types": 0,
   },
 };
