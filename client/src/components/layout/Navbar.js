@@ -30,6 +30,9 @@ const Navbar = ({ loading, isAuthenticated, logout: logoutHandler }) => {
         <NavLink to="/profiles">Developers</NavLink>
       </li>
       <li>
+        <NavLink to="/posts">Posts</NavLink>
+      </li>
+      <li>
         <Link onClick={logoutHandler} to="/login">
           <i className="fas fa-sign-out-alt" />{" "}
           <span className="hide-sm">Logout</span>
