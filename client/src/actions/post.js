@@ -5,6 +5,7 @@ import {
   POST_ERROR,
   GET_POST,
   ADD_LIKE,
+  ADD_POST,
   REMOVE_LIKE,
   REMOVE_POST,
 } from "./Types";
@@ -79,6 +80,27 @@ export const removePost = (id) => async (dispatch) => {
     dispatch({
       type: REMOVE_POST,
       payload: id,
+    });
+  } catch (error) {
+    dispatch({
+      type: POST_ERROR,
+      payload: error,
+    });
+    setAlert(error.response.data.msg, "danger");
+  }
+};
+
+export const addPost = (post) => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const res = await axios.post(`/api/posts/`, post, config);
+    dispatch({
+      type: ADD_POST,
+      payload: res.data,
     });
   } catch (error) {
     dispatch({

@@ -5,6 +5,7 @@ import {
   ADD_LIKE,
   REMOVE_LIKE,
   REMOVE_POST,
+  ADD_POST,
 } from "../actions/Types";
 
 const initialState = {
@@ -30,6 +31,12 @@ const postReducer = (state = initialState, { type, payload }) => {
           p._id === payload.id ? { ...p, likes: payload.likes } : p
         ),
         loading: false,
+      };
+    case ADD_POST:
+      return {
+        ...state,
+        loading: false,
+        posts: [payload, ...state.posts],
       };
     case REMOVE_POST:
       return {
