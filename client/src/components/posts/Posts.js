@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Spinner from "../layout/Spinner";
 import PostItem from "./Post";
 import { getAllPosts } from "../../actions/post";
+import PostForm from "./PostForm";
 
 const Posts = ({
   getAllPosts: getAllPostsHandler,
@@ -24,6 +25,7 @@ const Posts = ({
             Welcome to community
           </p>
           <div className="posts">
+            <PostForm />
             {posts.map((post) => (
               <PostItem key={post._id} post={post} />
             ))}
