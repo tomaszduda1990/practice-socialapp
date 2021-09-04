@@ -15,6 +15,7 @@ import Profile from "./components/profiles/Profile";
 import AddExperience from "./components/profile-form/AddExperience";
 import AddEducation from "./components/profile-form/AddEducation";
 import Posts from "./components/posts/Posts";
+import Post from "./components/post/Post";
 // redux
 import store from "./store";
 import { loadUser } from "./actions/auth";
@@ -29,6 +30,7 @@ const App = () => {
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
+
   return (
     <Provider store={store}>
       <Router>
@@ -47,6 +49,7 @@ const App = () => {
             <PrivateRoute path="/add-experience" component={AddExperience} />
             <PrivateRoute path="/add-education" component={AddEducation} />
             <PrivateRoute path="/posts" component={Posts} />
+            <PrivateRoute path="/post/:id" component={Post} />
           </Switch>
         </section>
       </Router>
