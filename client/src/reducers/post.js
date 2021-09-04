@@ -6,6 +6,8 @@ import {
   REMOVE_LIKE,
   REMOVE_POST,
   ADD_POST,
+  ADD_COMMENT,
+  REMOVE_COMMENT,
 } from "../actions/Types";
 
 const initialState = {
@@ -42,6 +44,16 @@ const postReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         posts: state.posts.filter((post) => post._id !== payload),
+        loading: false,
+      };
+    case ADD_COMMENT:
+    case REMOVE_COMMENT:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          comments: payload,
+        },
         loading: false,
       };
     default:

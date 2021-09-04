@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Spinner from "../layout/Spinner";
-import PostItem from "./Post";
+import PostItem from "./PostItem";
 import { getAllPosts } from "../../actions/post";
 import PostForm from "./PostForm";
 
@@ -14,7 +14,7 @@ const Posts = ({
     getAllPostsHandler();
   }, [getAllPostsHandler]);
   return loading ? (
-    <Spinner />
+    <Spinner size="medium" />
   ) : (
     <>
       {posts && posts.length > 0 ? (

@@ -1,5 +1,6 @@
 import axios from "axios";
 import setAlert from "./alert";
+import { loadUser } from "./auth";
 import {
   GET_ALL_POSTS,
   POST_ERROR,
@@ -8,10 +9,13 @@ import {
   ADD_POST,
   REMOVE_LIKE,
   REMOVE_POST,
+  ADD_COMMENT,
+  REMOVE_COMMENT,
 } from "./Types";
 
 export const getAllPosts = () => async (dispatch) => {
   try {
+    loadUser();
     const res = await axios.get("/api/posts");
     dispatch({
       type: GET_ALL_POSTS,
@@ -108,5 +112,34 @@ export const addPost = (post) => async (dispatch) => {
       payload: error,
     });
     setAlert(error.response.data.msg, "danger");
+  }
+};
+
+export const addComment = (id, formData) => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const res = await axios.post(`/api/posts/comment/${id}`, formData, config);
+    dispatch({
+      type: ADD_COMMENT,
+      payload: res.data,
+    });
+  } catch (error) {
+    setAlert(error.response.msg, "danger");
+  }
+};
+
+export const removeComment = (postId, commentId) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`/api/posts/comment/${postId}/${commentId}`);
+    dispatch({
+      type: REMOVE_COMMENT,
+      payload: res.data,
+    });
+  } catch (error) {
+    setAlert(error.response.msg, "danger");
   }
 };
