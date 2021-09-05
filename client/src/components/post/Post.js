@@ -12,7 +12,8 @@ const Post = ({ getPostById: getPost, post: { loading, post }, match }) => {
   useEffect(() => {
     getPost(match.params.id);
   }, [getPost]);
-  return !post && loading ? (
+  console.log(post);
+  return !post || loading ? (
     <Spinner />
   ) : (
     <>
