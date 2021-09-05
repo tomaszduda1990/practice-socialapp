@@ -12,7 +12,12 @@ const Post = ({ getPostById: getPost, post: { loading, post }, match }) => {
   useEffect(() => {
     getPost(match.params.id);
   }, [getPost]);
+  /*
+    comment to add some difference in file
+
+  */
   console.log(post);
+  console.log("UPDATED VERSION");
   return !post || loading ? (
     <Spinner />
   ) : (
