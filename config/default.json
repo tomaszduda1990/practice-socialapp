@@ -1,7 +1,0 @@
-{
-	"mongoURI": "mongodb+srv://tduda:4quila_Sucks@project0.983js.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-	"jwtSecret": "SZ8E99vt9WsTijTcauj1",
-	"gitSecret": "1a288f5afa762a043f0876e23a03d07fac7caa29",
-	"gitPublic": "5dd298c6f67b557519d4"
-}
-  
