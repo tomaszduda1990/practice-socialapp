@@ -16,6 +16,7 @@ import AddExperience from "./components/profile-form/AddExperience";
 import AddEducation from "./components/profile-form/AddEducation";
 import Posts from "./components/posts/Posts";
 import Post from "./components/post/Post";
+import useMediaQuery from "./hooks/useMediaQuery";
 // redux
 import store from "./store";
 import { loadUser } from "./actions/auth";
@@ -30,11 +31,27 @@ const App = () => {
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
+  const matchMediaQuery = useMediaQuery("(max-width: 768px)", 1000);
+  const styles = {
+    background: "#fff",
+    color: "#000",
+    border: "1px solid #000",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    zIndex: 10000000,
+  };
 
   return (
     <Provider store={store}>
       <Router>
         <Navbar />
+        {matchMediaQuery ? (
+          <h1 style={styles}>IS BELOW 768px</h1>
+        ) : (
+          <h1 style={styles}>IS ABOVE 768px</h1>
+        )}
         <Route exact path="/" component={Landing} />
         <section className="container">
           <Alert />
